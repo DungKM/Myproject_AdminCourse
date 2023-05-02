@@ -77,5 +77,4 @@ composer require barryvdh/laravel-debugbar --dev
 
 php artisan make:migration create_student_table
 php artisan migrate
-
-php artisan make:model Student
+php artisan make:model Student -a
