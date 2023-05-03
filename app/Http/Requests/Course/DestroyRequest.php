@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Course;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use PHPUnit\Framework\Constraint\Count;
 
-class StoreCourseRequest extends FormRequest
+class DestroyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +15,7 @@ class StoreCourseRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +25,16 @@ class StoreCourseRequest extends FormRequest
      */
     public function rules()
     {
+       
         return [
-            //
+            'course'=>[
+                'required',
+            ]
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge(input: ['course' => $this->route(param: 'course')]);
     }
 }

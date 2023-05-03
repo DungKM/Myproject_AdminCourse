@@ -78,3 +78,6 @@ composer require barryvdh/laravel-debugbar --dev
 php artisan make:migration create_student_table
 php artisan migrate
 php artisan make:model Student -a
+
+# laravel vaidate 
+php artisan make:request Course/StoreRequest

@@ -1,6 +1,21 @@
+
+@if($errors->any())
+<div class="">
+   <ul>
+    @foreach($errors->all() as $error)
+<li>{{$error}}</li>
+    @endforeach
+   </ul>
+</div>
+@endif
 <table border="1" width="100%">
     <h1>Courses</h1>
     <a href="{{route('courses.create')}}">Add Courses</a>
+    <caption>
+        <form>
+          Search :  <input type="search" name="q" value="{{$search}}">
+        </form>
+    </caption>
     <tr>
         <th>#</th>
         <th>Name</th>
@@ -25,4 +40,7 @@
             </td>
         </tr>
     @endforeach
+
 </table>
+
+<h3>{{ $data->links() }}</h3> 
