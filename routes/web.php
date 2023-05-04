@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource(name:'courses',controller:CourseController::class);
 
+Route::get('test', function(){
+    return view('layout.master');
+});
 
 // Route::group(attributes:['prefix' => 'courses','as' => 'courses.'], routes:function(){
 //     Route::get('/', [CourseController::class, 'index'])->name(name: 'index');

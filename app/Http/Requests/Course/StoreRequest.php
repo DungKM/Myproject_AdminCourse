@@ -36,7 +36,7 @@ class StoreRequest extends FormRequest
     public function messages(): array
     {
         return [
-          'required'=>':attribute Bắt buộc phải điền',
+          'required'=>':attribute bắt buộc phải điền',
         ];
     }
     public function attributes() : array
