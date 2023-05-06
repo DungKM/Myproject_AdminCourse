@@ -22,7 +22,7 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="{{asset('css/themify-icons.css')}}" rel="stylesheet">
-
+	@stack('css')
 </head>
 
 <body>
@@ -40,6 +40,7 @@
 	</div>
 </body>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<!--   Core JS Files. Extra: TouchPunch for touch library inside jquery-ui.min.js   -->
 	<script src="{{asset('js/jquery-3.1.1.min.js')}}" type="text/javascript"></script>
 	<script src="{{asset('js/jquery-ui.min.js')}}" type="text/javascript"></script>
@@ -107,5 +108,6 @@
 
     	});
 	</script>
+	 @stack('js')
 
 </html>

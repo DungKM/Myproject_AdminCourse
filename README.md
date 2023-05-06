@@ -81,3 +81,6 @@ php artisan make:model Student -a
 
 # laravel vaidate 
 php artisan make:request Course/StoreRequest
+
+# laravel jquery
+composer require yajra/laravel-datatables:"^9.0"

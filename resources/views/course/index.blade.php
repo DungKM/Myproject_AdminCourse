@@ -9,7 +9,6 @@
             <span class="btn-label">
                 <i class="ti-plus"></i> 
             </span>
-            
         Add Courses</a>
     </div>
     <br>
@@ -48,11 +47,7 @@
                                 </div>
                             </div>
                             <div class="pull-left search">
-                                <caption>
-                                    <form>
-                                      <input type="search" class="form-control" placeholder="Search" name="q" value="{{$search}}">
-                                    </form>
-                                </caption>
+    
                         </div>
                         <div class="fixed-table-container" style="padding-bottom: 0px;">
                             <div class="fixed-table-header" style="display: none;">
@@ -60,59 +55,19 @@
                             </div>
                             <div class="fixed-table-body">
                                 <div class="fixed-table-loading" style="top: 41px;">Loading, please wait...</div>  
-                                <table  id="bootstrap-table" class="table table-hover">                               
+                                <table  id="table-index" class="table table-hover">   
+                                    <thead>     
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
                                         <th>Created At</th>
-                                        <th class="td-actions text-right" style="" data-field="actions"><div class="th-inner ">Actions</div><div class="fht-cell"></div></th>
+                                        <th class="td-actions text-right" style="" data-field="actions"><div class="th-inner ">Edit</div><div class="fht-cell"></div></th>
+                                        <th class="td-actions text-right" style="" data-field="actions"><div class="th-inner ">Remove</div><div class="fht-cell"></div></th>
                                     </tr>
-                                    @foreach ($data as $each)
-                                        <tr>
-                                            <td>{{$each->id}}</td>
-                                            <td>{{$each->name}}</td>
-                                            <td>{{ $each->year_created_at }}</td>
-                                            <td class="td-actions text-right" style="">
-                                                <div class="table-icons">
-                                                    <a rel="tooltip" title="" class="btn btn-simple btn-info btn-icon table-action view" href="javascript:void(0)" data-original-title="View"><i class="ti-image"></i></a>
-
-                                                    <a rel="tooltip" title="" class="btn btn-simple btn-warning btn-icon table-action edit" href="{{route('courses.edit',$each)}}" data-original-title="Edit"><i class="ti-pencil-alt"></i></a>
-                                                    <a rel="tooltip" title="" class="btn btn-simple btn-danger btn-icon table-action delete" href="" data-original-title="Remove">
-                                                        <form action="{{route('courses.destroy',$each)}}" method="post">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button class="btn btn-simple btn-danger btn-icon table-action remove"><i class="ti-close"></i></button>
-                                                        </form>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                </thead> 
+                                <tbody></tbody>
+                               
                                 </table>
-                            </div>
-                            <div class="fixed-table-footer" style="display: none;">
-                                <table>
-                                    <tbody>
-                                        <tr></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="fixed-table-pagination">
-                                <div class="pull-left pagination-detail"><span class="pagination-info"></span><span
-                                        class="page-list"><span class="btn-group dropup"><button type="button"
-                                                class="btn btn-default  dropdown-toggle" data-toggle="dropdown"><span
-                                                    class="page-size">8</span> <span class="caret"></span></button>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li class="active"><a href="javascript:void(0)">8</a></li>
-                                                <li><a href="javascript:void(0)">10</a></li>
-                                                <li><a href="javascript:void(0)">25</a></li>
-                                            </ul>
-                                        </span> rows visible</span></div>
-                                <div class="pull-right pagination">
-                                    
-                                        {{ $data->links() }}
-                                   
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -122,6 +77,95 @@
         </div> <!-- end col-md-12 -->
     </div> <!-- end row -->
 </div>
-
-
 @endsection
+@push('js')
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript"
+        src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.11.5/b-2.2.2/b-colvis-2.2.2/b-html5-2.2.2/b-print-2.2.2/date-1.1.2/fc-4.0.2/fh-3.2.2/r-2.2.9/rg-1.1.4/sc-2.0.5/sb-1.3.2/sl-1.3.4/datatables.min.js"></script>
+<script>
+  $(function() {
+            var buttonCommon = {
+                exportOptions: {
+                    columns: ':visible :not(.not-export)'
+                }
+            };
+            let table = $('#table-index').DataTable({
+                dom: 'Blfrtip',
+                select: true,
+                buttons: [
+                    $.extend( true, {}, buttonCommon, {
+                        extend: 'copyHtml5'
+                    } ),
+                    $.extend( true, {}, buttonCommon, {
+                        extend: 'csvHtml5'
+                    } ),
+                    $.extend( true, {}, buttonCommon, {
+                        extend: 'excelHtml5'
+                    } ),
+                    $.extend( true, {}, buttonCommon, {
+                        extend: 'pdfHtml5'
+                    } ),
+                    $.extend( true, {}, buttonCommon, {
+                        extend: 'print'
+                    } ),
+                    'colvis'
+                ],
+                processing: true,
+                serverSide: true,
+                ajax: '{!! route('courses.api') !!}',
+                columnDefs: [
+                    { className: "not-export", "targets": [ 3 ] }
+                ],
+                columns: [
+                    { data: 'id', name: 'id' },
+                    { data: 'name', name: 'name' },
+                    { data: 'created_at', name: 'created_at' },
+                    {
+                        data: 'edit',
+                        targets: 3,
+                        orderable: false,
+                        searchable: false,
+                        render: function ( data, type, row, meta ) {
+                          return `<a class="btn btn-primary" href="${data}">
+                                Edit
+                            </a>`;
+                        }
+                    },
+                    {
+                        data: 'destroy',
+                        targets: 4,
+                        orderable: false,
+                        searchable: false,
+                        render: function ( data, type, row, meta ) {
+                          return `<form action="${data}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type='button' class="btn-delete btn btn-danger">Delete</button>
+                            </form>`;
+                        }
+                    },
+                ]
+            });
+            $(document).on('click','.btn-delete',function(){
+                let form = $(this).parents('form');
+                $.ajax({
+                    url: form.attr('action'),
+                    type: 'POST',
+                    dataType: 'json',
+                    data: form.serialize(),
+                    success: function() {
+                        console.log("success");
+                        table.draw();
+                    },
+                    error: function() {
+                        console.log("error");
+                    }
+                });
+            });
+        });
+
+
+</script>
+ 
+@endpush

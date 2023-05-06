@@ -3,12 +3,10 @@
 use App\Http\Controllers\CourseController;
 use Illuminate\Support\Facades\Route;
 
-Route::resource(name:'courses',controller:CourseController::class);
-
-Route::get('test', function(){
-    return view('layout.master');
-});
-
+Route::resource('courses', CourseController::class)->except([
+    'show',
+]);
+Route::get('courses/api', [CourseController::class, 'api'])->name('courses.api');
 // Route::group(attributes:['prefix' => 'courses','as' => 'courses.'], routes:function(){
 //     Route::get('/', [CourseController::class, 'index'])->name(name: 'index');
 //     Route::get('/create', [CourseController::class, 'create'])->name(name: 'create');
