@@ -13,7 +13,7 @@
                 @csrf
                 <div class="card-header text-center">
                         <h4 class="card-title">
-                                Form create
+                            Form create
                         </h4>
                 </div>
                 <div class="card-content">

@@ -2,7 +2,6 @@
 @extends('layout.master')
 @section('content')
 <div class="container-fluid">
-    <h1>Courses</h1>
     <div class="mb-5">
        
         <a href="{{route('courses.create')}}"  class="btn btn-wd btn-success"> 
@@ -61,11 +60,10 @@
                                         <th>#</th>
                                         <th>Name</th>
                                         <th>Created At</th>
-                                        <th class="td-actions text-right" style="" data-field="actions"><div class="th-inner ">Edit</div><div class="fht-cell"></div></th>
-                                        <th class="td-actions text-right" style="" data-field="actions"><div class="th-inner ">Remove</div><div class="fht-cell"></div></th>
+                                        <th>Edit</th>
+                                        <th>Remove</th>
                                     </tr>
                                 </thead> 
-                                <tbody></tbody>
                                
                                 </table>
                             </div>
@@ -95,28 +93,56 @@
                 select: true,
                 buttons: [
                     $.extend( true, {}, buttonCommon, {
-                        extend: 'copyHtml5'
+                        extend: 'copyHtml5',
+                        text: '<a style="color: #FFFFFF;">COPY</a>',
+                        className: "btn btn-info btn-fill btn-wd",
                     } ),
                     $.extend( true, {}, buttonCommon, {
-                        extend: 'csvHtml5'
+                        extend: 'csvHtml5',
+                        text: '<a style="color: #FFFFFF;">CSV</a>',
+                        className: "btn btn-info btn-fill btn-wd",
                     } ),
                     $.extend( true, {}, buttonCommon, {
-                        extend: 'excelHtml5'
+                        extend: 'excelHtml5',
+                        text: '<a style="color: #FFFFFF;">EXCEL</a>',
+                        className: "btn btn-info btn-fill btn-wd",
+
                     } ),
                     $.extend( true, {}, buttonCommon, {
-                        extend: 'pdfHtml5'
+                        extend: 'pdfHtml5',
+                        text: '<a style="color: #FFFFFF;">PDF</a>',
+                        className: "btn btn-info btn-fill btn-wd",
                     } ),
                     $.extend( true, {}, buttonCommon, {
-                        extend: 'print'
-                    } ),
-                    'colvis'
+                        extend: 'print',
+                        text: "<i class='fa fa-print text-125 text-orange-d1'></i> <span class='d-none'>Print</span>",
+                        className: "btn btn-info btn-fill btn-wd",
+                    }),
+                    $.extend( true, {}, buttonCommon, {
+                        extend: 'colvis',
+                        text: "<i class='fa fa-eye text-125 text-dark-m2'></i> <span class='d-none'>Show/hide columns</span>",
+                        className: "btn btn-info btn-fill btn-wd",
+                       
+                    }),
+                   
+                    
                 ],
+                lengthMenu: [1, 10, 25, 50, 75, 100 ],
                 processing: true,
                 serverSide: true,
                 ajax: '{!! route('courses.api') !!}',
                 columnDefs: [
-                    { className: "not-export", "targets": [ 3 ] }
+                    { className: "not-export", "targets": [ 3, 4 ] }
                 ],
+                language: {
+                    "paginate": {
+                       
+                        "next": '<span class="btn btn-default">Next</span>',
+                        "previous": '<span class="btn btn-default">Previous</span>',
+                        
+                    }
+                  
+                },
                 columns: [
                     { data: 'id', name: 'id' },
                     { data: 'name', name: 'name' },
@@ -145,6 +171,7 @@
                             </form>`;
                         }
                     },
+
                 ]
             });
             $(document).on('click','.btn-delete',function(){
@@ -163,6 +190,8 @@
                     }
                 });
             });
+
+          
         });
 
 
