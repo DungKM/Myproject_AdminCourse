@@ -6,6 +6,7 @@ use App\Http\Requests\Course\DestroyRequest;
 use App\Http\Requests\Course\StoreRequest;
 use App\Http\Requests\Course\UpdateRequest;
 use App\Models\Course;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Yajra\DataTables\DataTables;
@@ -41,6 +42,15 @@ class CourseController extends Controller
             })
             ->make(true);
     }
+    public function apiName(Request $request)
+    {
+        return $this->model
+            ->where(column: 'name', operator: 'like', value: '%' .  $request->get(key: 'q'). '%')
+            ->get([
+                'id',
+                'name'
+            ]);
+    }
 
 
     public function create()
@@ -72,7 +82,7 @@ class CourseController extends Controller
     }
     public function destroy(DestroyRequest $request, $courseId)
     {
-        $this->model->where('id',$courseId)->delete();
+        $this->model->where('id', $courseId)->delete();
         $arr['status'] = true;
         $arr['message'] = '';
         return response($arr, 200);

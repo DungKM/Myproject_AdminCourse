@@ -78,9 +78,14 @@ composer require barryvdh/laravel-debugbar --dev
 php artisan make:migration create_student_table
 php artisan migrate
 php artisan make:model Student -a
+php artisan make:controller UserController
 
 # laravel vaidate 
 php artisan make:request Course/StoreRequest
 
 # laravel jquery
 composer require yajra/laravel-datatables:"^9.0"
+
+# laravel enum 
+composer require bensampo/laravel-enum
+php artisan make:enum StudentStatusEnum

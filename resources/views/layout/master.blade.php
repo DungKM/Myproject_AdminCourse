@@ -31,7 +31,25 @@
 
 	    <div class="main-panel">
 			@include('layout.header')
-
+			<div>
+				@if ($errors->any())
+			<div class="alert alert-danger">
+				<ul>
+					@foreach ($errors->all() as $error)
+						<li>{{ $error }}</li>
+					@endforeach
+				</ul>
+			</div>
+		   @endif
+			</div>
+			<div>
+				@if (session() -> has('success'))
+			<div class="alert alert-info">
+						<div>{{ session()->get('success') }}</div>
+			</div>
+		   @endif
+			</div>
+			
 	        <div class="content">
 				<h4>{{$title}}</h4>
 	         @yield('content')

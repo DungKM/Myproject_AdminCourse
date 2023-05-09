@@ -10,11 +10,11 @@
 <div class="container-fluid">
     <div class="mb-5">
        
-        <a href="{{route('courses.create')}}"  class="btn btn-wd btn-success"> 
+        <a href="{{route('students.create')}}"  class="btn btn-wd btn-success"> 
             <span class="btn-label">
                 <i class="ti-plus"></i> 
             </span>
-        Add Courses</a>
+        Add students</a>
     </div>
     <br>
     <div class="row">
@@ -31,7 +31,7 @@
                             <div class="columns columns-right pull-right">
                                 <div class="pull-left search">
                                     <select id="select-name" style="width: 400px"></select>
-                            </div>  
+                                </div>  
                             </div>
                         <div class="fixed-table-container" style="padding-bottom: 0px;">
                             <div class="fixed-table-body">
@@ -41,7 +41,10 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
-                                        <th>Created At</th>
+                                        <th>Age</th>
+                                        <th>Gender</th>
+                                        <th>Status</th>
+                                        <th>Course</th>
                                         <th>Edit</th>
                                         <th>Remove</th>
                                     </tr>
@@ -66,80 +69,53 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
             $(function() {
-            $("#select-name").select2({
-                ajax: {
-                    url: "{{route('courses.api.name')}}",
-                    dataType: 'json',
-                    data: function (params) {
-                    return {
-                        q: params.term, // search term
-                    };
-                    },
-                    processResults: function (data, params) {
-                    console.log(data);
-                    return {
-                        results:  $.map(data, function (item) {
-                    return {
-                        text: item.name,
-                        id: item.id
-                    }
-                })
-                };
-                }
-                },
-                placeholder: 'Search for a name',
-            });
             var buttonCommon = {
                 exportOptions: {
                     columns: ':visible :not(.not-export)'
                 }
             };
+
             let table = $('#table-index').DataTable({
                 dom: 'Brtip',
                 select: true,
                 buttons: [
                     $.extend( true, {}, buttonCommon, {
                         extend: 'copyHtml5',
-                        
-                    } ),
+                    }),
                     $.extend( true, {}, buttonCommon, {
                         extend: 'csvHtml5',
-                      
-                    } ),
+                    }),
                     $.extend( true, {}, buttonCommon, {
-                        extend: 'excelHtml5',
-                        
-                    } ),
+                        extend: 'excelHtml5',  
+                    }),
                     $.extend( true, {}, buttonCommon, {
                         extend: 'pdfHtml5',
-                        
-                    } ),
+                    }),
                     $.extend( true, {}, buttonCommon, {
                         extend: 'print',
-                      
                     }),
                     $.extend( true, {}, buttonCommon, {
                         extend: 'colvis',
-                      
-                       
                     }),
-                   
-                    
                 ],
                 lengthMenu: [1, 10, 25, 50, 75, 100 ],
                 processing: true,
                 serverSide: true,
-                ajax: '{!! route('courses.api') !!}',
+                ajax: '{!! route('students.api') !!}',
                 columnDefs: [
-                    { className: "not-export", "targets": [ 3, 4 ] }
+                    { className: "not-export", "targets": [ 6, 7 ] }
                 ],
+             
                 columns: [
                     { data: 'id', name: 'id' },
                     { data: 'name', name: 'name' },
-                    { data: 'created_at', name: 'created_at' },
+                    { data: 'age', name: 'age' },
+                    { data: 'gender', name: 'gender' },
+                    { data: 'status', name: 'status' },
+                    { data: 'course_id', name: 'course_id' },
                     {
                         data: 'edit',
-                        targets: 3,
+                        targets: 6,
                         orderable: false,
                         searchable: false,
                         render: function ( data, type, row, meta ) {
@@ -150,7 +126,7 @@
                     },
                     {
                         data: 'destroy',
-                        targets: 4,
+                        targets: 7,
                         orderable: false,
                         searchable: false,
                         render: function ( data, type, row, meta ) {
@@ -162,10 +138,7 @@
                         }
                     },
 
-                ]
-            });
-            $('#select-name').change(function(){
-                table.column(0).search(this.value).draw();
+                ],
             });
             $(document).on('click','.btn-delete',function(){
                 let form = $(this).parents('form');
