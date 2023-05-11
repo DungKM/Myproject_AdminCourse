@@ -9,7 +9,7 @@
         <div class="row">
         <div class="col-md-6 col-md-offset-3">
         <div class="card">
-            <form id="loginFormValidation" action="{{route('students.store')}}" method="post">
+            <form id="loginFormValidation" action="{{route('students.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="card-header text-center">
                         <h4 class="card-title">
@@ -39,6 +39,10 @@
                         @endif
                         > {{$option}}
                         @endforeach
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Avatar </label>
+                        <input type="file" class="form-control"  name="avatar">
                     </div>
                     <div class="form-group">
                         <label class="control-label">Courses</label>

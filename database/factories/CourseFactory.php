@@ -18,6 +18,8 @@ class CourseFactory extends Factory
     {
         return [
             //
+            'name'=>$this->faker->name()
+            
         ];
     }
 }

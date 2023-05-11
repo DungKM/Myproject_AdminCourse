@@ -46,6 +46,11 @@ class StoreRequest extends FormRequest
                 'required',
                 Rule::in(values: StudentStatusEnum::asArray())
             ],
+            'avatar' =>[
+                'nullable',
+                'file',
+                'image'
+            ],
             'course_id'=>[
                 'required',
                 Rule::exists(Course::class,'id')

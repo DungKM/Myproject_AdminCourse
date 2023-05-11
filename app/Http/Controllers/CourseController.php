@@ -30,22 +30,16 @@ class CourseController extends Controller
     }
     public function api()
     {
-        return DataTables::of(Course::query())
-            ->editColumn('created_at', function ($object) {
-                return $object->year_created_at;
-            })
-            ->addColumn('edit', function ($object) {
-                return route('courses.edit', $object);
-            })
-            ->addColumn('destroy', function ($object) {
-                return route('courses.destroy', $object);
-            })
+        return DataTables::of($this->model->withCount('students'))
+            ->editColumn('created_at', fn ($obj) => $obj->year_created_at)
+            ->addColumn('edit', fn ($obj) => route('courses.edit', $obj))
+            ->addColumn('destroy', fn ($obj) => route('courses.destroy', $obj))
             ->make(true);
     }
     public function apiName(Request $request)
     {
         return $this->model
-            ->where(column: 'name', operator: 'like', value: '%' .  $request->get(key: 'q'). '%')
+            ->where(column: 'name', operator: 'like', value: '%' .  $request->get(key: 'q') . '%')
             ->get([
                 'id',
                 'name'

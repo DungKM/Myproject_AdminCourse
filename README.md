@@ -89,3 +89,11 @@ composer require yajra/laravel-datatables:"^9.0"
 # laravel enum 
 composer require bensampo/laravel-enum
 php artisan make:enum StudentStatusEnum
+
+# laravel seeders -> tạo db ảo
+php artisan migrate:fresh --seed
+# tạo bảng upload
+php artisan make:migration alter_add_column_avatar_to_students_table
+
+# laravel upload 
+php artisan storage:link

@@ -24,7 +24,7 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' =>[
+            'name' => [
                 'bail',
                 'required',
                 'string',
@@ -36,13 +36,13 @@ class StoreRequest extends FormRequest
     public function messages(): array
     {
         return [
-          'required'=>':attribute bắt buộc phải điền',
+            'required' => ':attribute bắt buộc phải điền',
         ];
     }
-    public function attributes() : array
+    public function attributes(): array
     {
         return [
-            'name'=>'Name',
-          ];
+            'name' => 'Name',
+        ];
     }
 }

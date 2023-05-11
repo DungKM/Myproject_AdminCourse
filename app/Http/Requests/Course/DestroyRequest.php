@@ -25,9 +25,9 @@ class DestroyRequest extends FormRequest
      */
     public function rules()
     {
-       
+
         return [
-            'course'=>[
+            'course' => [
                 'required',
             ]
         ];
@@ -35,6 +35,6 @@ class DestroyRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        $this->merge(input: ['course' => $this->route(param: 'course')]);
+        $this->merge(input: ['course' => $this->route(param:'course')]);
     }
 }

@@ -7,7 +7,8 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 class UpdateRequest extends FormRequest
-{/**
+{
+    /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
@@ -22,15 +23,15 @@ class UpdateRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules() :array
+    public function rules(): array
     {
-        
+
         return [
-            'name' =>[
+            'name' => [
                 'bail',
                 'required',
                 'string',
-                Rule::unique(table:'courses')->ignore(id: $this->course),
+                Rule::unique(table: 'courses')->ignore(id: $this->course),
             ],
         ];
     }
@@ -38,13 +39,13 @@ class UpdateRequest extends FormRequest
     public function messages(): array
     {
         return [
-          'required'=>':attribute Bắt buộc phải điền',
+            'required' => ':attribute Bắt buộc phải điền',
         ];
     }
-    public function attributes() : array
+    public function attributes(): array
     {
         return [
-            'name'=>'Name',
-          ];
+            'name' => 'Name',
+        ];
     }
 }
