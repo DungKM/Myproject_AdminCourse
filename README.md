@@ -97,3 +97,6 @@ php artisan make:migration alter_add_column_avatar_to_students_table
 
 # laravel upload 
 php artisan storage:link
+
+# helper 
+https://stackoverflow.com/questions/28290332/how-to-create-custom-helper-functions-in-laravel

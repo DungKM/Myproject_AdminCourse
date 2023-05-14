@@ -1,53 +1,34 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
-Route::resource('courses', CourseController::class)->except([
-    'show',
-]);
-Route::get('courses/api', [CourseController::class, 'api'])->name('courses.api');
-Route::get('courses/api/name', [CourseController::class, 'apiName'])->name('courses.api.name');
 
 
+Route::get('login', [AuthController::class, 'login'])->name('login');
+Route::post('login', [AuthController::class, 'processLogin'])->name('process_login');
 
-
-
-
-Route::resource('students', StudentController::class)->except([
-    'show',
-]);
-Route::get('students/api', [StudentController::class, 'api'])->name('students.api');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Route::group(attributes:['prefix' => 'courses','as' => 'courses.'], routes:function(){
-//     Route::get('/', [CourseController::class, 'index'])->name(name: 'index');
-//     Route::get('/create', [CourseController::class, 'create'])->name(name: 'create');
-//     Route::post('/create', [CourseController::class, 'store'])->name(name: 'store');
-//     Route::delete('/destroy/{course}', [CourseController::class, 'destroy'])->name(name: 'destroy');
-//     Route::get('/edit/{course}', [CourseController::class, 'edit'])->name(name: 'edit');
-//     Route::put('/update/{course}', [CourseController::class, 'update'])->name(name: 'update');
-// });
-
-// Route::get('/', [CourseController::class, 'index'])->name(name: 'courses.index');
-//     Route::get('courses/create', [CourseController::class, 'create'])->name(name: 'courses.create');
-//     Route::post('courses/create', [CourseController::class, 'store'])->name(name: 'courses.store');
-//     Route::delete('courses/destroy/{course}', [CourseController::class, 'destroy'])->name(name: 'courses.destroy');
-//     Route::get('courses/edit/{course}', [CourseController::class, 'edit'])->name(name: 'courses.edit');
-//     Route::put('courses/update/{course}', [CourseController::class, 'update'])->name(name: 'courses.update');
+Route::group([
+    'middleware' => 'admin'
+], function () {
+    Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+    Route::resource('courses', CourseController::class)->except([
+        'show',
+        'destroy'
+    ]);
+    Route::get('courses/api', [CourseController::class, 'api'])->name('courses.api');
+    Route::get('courses/api/name', [CourseController::class, 'apiName'])->name('courses.api.name');
+    Route::resource('students', StudentController::class)->except([
+        'show',
+        'destroy'
+    ]);
+    Route::get('students/api', [StudentController::class, 'api'])->name('students.api');
+    Route::group([
+        'middleware' => 'superadmin'
+    ], function () {
+        Route::delete('courses/{course}', [CourseController::class, 'destroy'])->name('courses.destroy');
+        Route::delete('students/{course}', [CourseController::class, 'destroy'])->name('students.destroy');
+    });
+});

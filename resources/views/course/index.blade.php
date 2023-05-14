@@ -44,7 +44,9 @@
                                         <th>number_students</th>
                                         <th>Created At</th>
                                         <th>Edit</th>
+                                        @if(SuperAdmin())
                                         <th>Remove</th>
+                                        @endif
                                     </tr>
                                 </thead> 
                                
@@ -150,6 +152,7 @@
                             </a>`;
                         }
                     },
+                    @if(SuperAdmin())
                     {
                         data: 'destroy',
                         targets: 4,
@@ -162,8 +165,8 @@
                                 <button type='button' class="btn-delete btn btn-danger">Delete</button>
                             </form>`;
                         }
-                    },
-
+                    }
+                    @endif
                 ]
             });
             $('#select-name').change(function(){

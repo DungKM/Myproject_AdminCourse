@@ -21,7 +21,8 @@
 
                     <a data-toggle="collapse" href="#collapseExample" class="collapsed">
                         <span>
-                            Chet Faker
+                            {{ session()->get('name')}}
+                            
                             <b class="caret"></b>
                         </span>
                     </a>
@@ -45,6 +46,12 @@
                                 <a href="#settings">
                                     <span class="sidebar-mini">S</span>
                                     <span class="sidebar-normal">Settings</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{'logout'}}">
+                                    <span class="sidebar-mini">S</span>
+                                    <span class="sidebar-normal">Logout</span>
                                 </a>
                             </li>
                         </ul>

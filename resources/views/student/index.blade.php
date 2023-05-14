@@ -141,7 +141,7 @@
                     ajax: '{!! route('students.api') !!}',
                     columnDefs: [{
                         className: "not-export",
-                        "targets": [ 7, 8]
+                        "targets": [7, 8]
                     }],
 
                     columns: [{
@@ -166,14 +166,14 @@
                         },
                         {
                             data: 'avatar',
-                             targets: 5,
+                            targets: 5,
                             orderable: false,
                             searchable: false,
                             render: function(data, type, row, meta) {
-                                if(!data){
+                                if (!data) {
                                     return '';
                                 }
-                                return `<img src="{{url('public')}}/${data}">`;
+                                return `<img src="{{ url('public') }}/${data}">`;
                             }
                         },
                         {
