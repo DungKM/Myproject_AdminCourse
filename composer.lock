@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD:composer.lock
     "content-hash": "92d4262e60ce6c88f347fe4452c5f0f4",
+=======
+    "content-hash": "bdeb57536eebf4a17fae98da3fc5de48",
+>>>>>>> 584b6ec808f71f08f2f38c16e2a989aba5e38a63:laravelProject/composer.lock
     "packages": [
         {
             "name": "bensampo/laravel-enum",
