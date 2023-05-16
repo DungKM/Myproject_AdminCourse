@@ -100,3 +100,14 @@ php artisan storage:link
 
 # helper 
 https://stackoverflow.com/questions/28290332/how-to-create-custom-helper-functions-in-laravel
+
+# notifications and observers
+ php artisan make:notification UserRegisterNotificationMail
+
+  php artisan make:observer UserObserver --model=User
+
+# events laravel
+
+php artisan make:event PodcastProcessed
+
+php artisan make:listener SendMailNotification --event=UserRegisteredEvent   ener SendMailNotification --event=UserRegisteredEvent
