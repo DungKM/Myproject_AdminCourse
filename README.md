@@ -65,48 +65,48 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-# laravel install
+# Laravel install
 
 composer create-project laravel/laravel example-app
 
-# laravel debug
+# Laravel debug
 
 composer require barryvdh/laravel-debugbar --dev
 
-# laravel init
+# Laravel init
 
 php artisan make:migration create_student_table
 php artisan migrate
 php artisan make:model Student -a
 php artisan make:controller UserController
 
-# laravel vaidate 
+# Laravel vaidate 
 php artisan make:request Course/StoreRequest
 
-# laravel jquery
+# Laravel jquery
 composer require yajra/laravel-datatables:"^9.0"
 
-# laravel enum 
+# Laravel enum 
 composer require bensampo/laravel-enum
 php artisan make:enum StudentStatusEnum
 
-# laravel seeders -> tạo db ảo
+# Laravel seeders -> tạo db ảo
 php artisan migrate:fresh --seed
-# tạo bảng upload
+# Tạo bảng upload
 php artisan make:migration alter_add_column_avatar_to_students_table
 
-# laravel upload 
+# Laravel upload 
 php artisan storage:link
 
-# helper 
+# Helper 
 https://stackoverflow.com/questions/28290332/how-to-create-custom-helper-functions-in-laravel
 
-# notifications and observers
+# Notifications and observers
  php artisan make:notification UserRegisterNotificationMail
 
   php artisan make:observer UserObserver --model=User
 
-# events laravel
+# Events laravel
 
 php artisan make:event PodcastProcessed
 
